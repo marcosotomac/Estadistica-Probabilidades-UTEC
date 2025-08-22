@@ -98,3 +98,18 @@ df[1:2, c ("Nombre", "Edad")] # basicamente df[fila, c("nombres de las variables
 # Personas mayores de 30 años
 subset(df, Edad > 30)
 ```
+
+```{r}
+personas_lima <- subset(df, Ciudad == "Lima" & Ingresos > 3000)
+personas_lima
+```
+
+```{r}
+#Ordenar por edad de forma ascendente
+df[order(df$Edad),]
+```
+
+```{r}
+#Ordenar los ingresos de forma descendente
+df[order(-df$Ingresos),]
+```
