@@ -1,0 +1,93 @@
+---
+title: "Data Frame"
+format: html
+editor: visual
+---
+
+## Creacion de un DataFrame usando vectores:
+
+Creacion de vectores
+
+Vector: coleccion de elementos
+
+option + command + i -\> genera un contenedor para programar en R:
+
+```{r}
+# Para definir un vector se usa la letra c
+codigo <- c(10,20,30)
+nombre <- c("Marco", "Joaquin", "Diego")
+edad <- c(22,19,21)
+ponderado <- c(19.2,18.5, 20)
+codigo
+nombre
+edad
+```
+
+## Creación del DataFrame
+
+Se usa la funcion data.frame(variables)
+
+```{r}
+DF <- data.frame(codigo, nombre, edad, ponderado)
+DF
+```
+
+Visualizar el dataframe en otra ventana
+
+```{r}
+View(DF)
+```
+
+Conocer la estructura del dataframe
+
+```{r}
+str(DF)
+```
+
+Resumen de medidas estadisticas:
+
+Min: minimo
+
+1st Qu: primer cuartil
+
+Median: madiana (valor central, segundo cuartil)
+
+Mean: media aritmetica (promedio)
+
+3rd Qu: tercer cuartil
+
+Max: maximo
+
+```{r}
+summary(DF)
+```
+
+### Ejercicio 1:
+
+```{r}
+# Creamos un dataframe sencillo
+df <- data.frame(
+  ID = 1:6,
+  Nombre = c("Ana", "Luis", "Carla", "Pedro", "Marta", "Jorge"),
+  Edad = c(23, 35, 29, 42, 31, 27),
+  Ciudad = c("Lima", "Cusco", "Lima", "Arequipa", "Lima", "Cusco"),
+  Ingresos = c(2500, 3200, 2800, 4000, 3500, 2700)
+)
+df
+```
+
+```{r}
+str(df)
+```
+
+### Seleccion de columnas:
+
+```{r}
+#Seleccionar solo la columna nombre:
+df$Nombre
+```
+
+```{r}
+#seleccionar columnas nombre y edad
+df[1:2, c ("Nombre", "Edad")] # basicamente df[rango de filas, c("nombres de las variables")]
+```
