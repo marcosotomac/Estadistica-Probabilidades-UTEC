@@ -89,5 +89,12 @@ df$Nombre
 
 ```{r}
 #seleccionar columnas nombre y edad
-df[1:2, c ("Nombre", "Edad")] # basicamente df[rango de filas, c("nombres de las variables")]
+df[1:2, c ("Nombre", "Edad")] # basicamente df[fila, c("nombres de las variables")]
+```
+
+### Filtrar filas con condiciones:
+
+```{r}
+# Personas mayores de 30 años
+subset(df, Edad > 30)
 ```
