@@ -44,7 +44,7 @@ Conocer la estructura del dataframe
 str(DF)
 ```
 
-Resumen de medidas estadisticas:
+Resumen de medidas estadísticas:
 
 Min: minimo
 
@@ -80,7 +80,7 @@ df
 str(df)
 ```
 
-### Seleccion de columnas:
+### Selección de columnas:
 
 ```{r}
 #Seleccionar solo la columna nombre:
