@@ -1,0 +1,230 @@
+---
+title: "Librería dplyr"
+author: "Antonio Gamero"
+format: html
+editor: visual
+---
+
+## dplyr
+
+La librería `dplyr` es un paquete muy potente, ya que permite manipular datos de forma muy sencilla, tanto para datos de R, como bases de datos (sin necesidad de conocer SQL) 
+
+### Instalación:
+
+```{r}
+install.packages("dplyr")
+library(dplyr)
+```
+
+### Ejemplo 1:
+
+### Usaremos el conjunto de datos mtcars:
+
+```{r}
+data(mtcars)
+mtcars
+```
+
+### Variables del dataframe mtcars:
+
+**mpg:** millas por galón
+
+**cyl:** número de cilindros
+
+**disp:** desplazamiento de los cilindros (pulgadas cúbicas)
+
+**hp:** potencia en caballos de vapor
+
+**drat:** razón entre ejes (número de revoluciones de la trasmisión por cada vuelta de rueda)
+
+**wt:** peso en miles de libras
+
+**qsec:** segundos para recorrer un cuarto de milla
+
+**vs:** tipo de cilindros (en línea o Serie)
+
+**am:** tipo de trasmisión (automática; manual)
+
+**gear:** número de marchas hacia adelante
+
+**carb:** número de carburadores
+
+### Mostrar los 6 primeros registros:
+
+```{r}
+head(mtcars)
+```
+
+### Resumen de medidas estadísticas:
+
+```{r}
+summary(mtcars)
+```
+
+### Dimensiones de mtcars:
+
+```{r}
+dim(mtcars)
+```
+
+### Independizando la invocación de las variables:
+
+```{r}
+attach(mtcars)
+```
+
+### Comando pipe
+
+dplyr incluye el operador %\>%, también llamado pipe que permite concatenar funciones.
+
+### Ejercicio 1:
+
+Ordenar los autos que tienen **más de 120 caballos de potencia** por su **consumo de** **gasolina** (variable mpg) de **forma descendente**.
+
+**Caso 1:** Sin usar el operador **pipe**:
+
+```{r}
+# Muestra registros con hp > 120
+mtcars_filtrado <- filter(mtcars, hp>120)
+# En los resultados de la consulta anterior se ordena mpg en forma descendente
+mtcars_ordenado <- arrange(mtcars_filtrado, desc(mpg))
+head(mtcars_ordenado)
+```
+
+**Caso 2:** Usando el operador pipe:
+
+```{r}
+consulta <- mtcars %>% filter(hp>120) %>% arrange(desc(mpg)) %>% head()
+```
+
+```{r}
+consulta
+```
+
+### Ejercicio 2:
+
+```{r}
+#install.packages("gapminder")
+library(gapminder)
+```
+
+```{r}
+data(gapminder)
+```
+
+```{r}
+gapminder
+```
+
+```{r}
+str(gapminder)
+```
+
+```{r}
+apply(is.na(gapminder),2,sum)
+```
+
+## Realizando consultas:
+
+### Consulta 1:
+
+Filtrar los datos de los cuatro países Peru, Mexico, Colombia, Chile y los años seleccionados: 1967, 1987, 2007. Seleccionar las variables pais, año, población y pbi per cápita. Calcular el pbi total para cada observación. Organizar por valor de año en forma ascendente y pbi total en orden descendente.
+
+```{r}
+unique(gapminder$country)
+```
+
+```{r}
+levels(gapminder$country)
+```
+
+```{r}
+table(gapminder$country)
+```
+
+```{r}
+consulta1 <- gapminder %>% 
+    filter(country %in% c("Peru", "Mexico", "Colombia", "Chile"),
+           year %in% c(1967, 1987, 2007)) %>% 
+    select(country, pop, gdpPercap, year) %>% 
+    mutate(pbi_total = pop * gdpPercap) %>% 
+    arrange(year, desc(pbi_total))
+```
+
+```{r}
+consulta1
+```
+
+### Consulta 2:
+
+¿Qué continentes tuvieron la mejor y peor expectativa de vida (**liveExp**) mediana en 1992?
+
+```{r}
+str(gapminder)
+```
+
+```{r}
+consulta2 <- gapminder %>% 
+    filter(year == 1992) %>% 
+    select(continent, lifeExp) %>% 
+    group_by(continent) %>% 
+    summarise(mediana = median(lifeExp)) %>% 
+    arrange(desc(mediana))
+```
+
+```{r}
+consulta2
+```
+
+### **Consulta 3:**
+
+¿Qué continentes tuvieron la mejor y peor expectativa de vida promedio en 2007?
+
+```{r}
+consulta3 <- gapminder %>% 
+    filter(year == 2007) %>% 
+    select(continent, lifeExp) %>% 
+    group_by(continent) %>% 
+    summarise(promedio = mean(lifeExp)) %>% 
+    arrange(desc(promedio))
+```
+
+```{r}
+consulta3
+```
+
+### Consulta 4:
+
+Analizar la variabilidad en función del coeficiente de variación de la variable **lifeExp** por continente en el año 1987 ordenado en forma descendente:
+
+```{r}
+consulta4 <- gapminder %>% 
+    filter(year == 1987) %>% 
+    select(continent, lifeExp) %>% 
+    group_by(continent) %>% 
+    summarise(coeficiente_variacion = round(sd(lifeExp)/mean(lifeExp),2)) %>% 
+    arrange(desc(coeficiente_variacion))
+```
+
+```{r}
+consulta4
+```
+
+### Consulta 5:
+
+¿Qué continente tuvo el mayor porcentaje de países con expectativa de vida superior a la mediana mundial en 2007?
+
+```{r}
+consulta5 <- gapminder %>% 
+    filter(year == 2007) %>% 
+    mutate(mediana_mundial = median(lifeExp),
+           mayor_que_mediana = lifeExp > mediana_mundial) %>% 
+    group_by(continent) %>% 
+    summarise(n_paises = n(),
+              n_paises_mayor_que_mediana = sum(mayor_que_mediana)) %>% 
+    mutate(porcentaje_paises_mayores = n_paises_mayor_que_mediana/n_paises*100) %>%     arrange(desc(porcentaje_paises_mayores))
+```
+
+```{r}
+consulta5
+```

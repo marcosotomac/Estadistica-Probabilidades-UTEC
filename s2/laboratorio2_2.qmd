@@ -1,0 +1,103 @@
+---
+title: "Ejercicio de limpieza de datos"
+format: html
+editor: visual
+---
+
+# Ejercicio 1:
+
+## Se tienen los siguientes vectores:
+
+```{r}
+# valores correctos: rosado, blanco, azul
+color <- c("rosado", "blanco", "Blanco", "roosadoo","vlancoo","Azulito","azul")
+edad <- c(19,32,28,16,15,26,31)
+```
+
+## 1) Crear un data drame con las variables color y edad:
+
+```{r}
+DF1 <- data.frame(color,edad)
+DF1
+```
+
+## 2) Usar R para hacer una limpieza de datos en la variable "color".
+
+```{r}
+DF1$color[DF1$color == "roosadoo"] <- "rosado"
+DF1$color[(DF1$color == "Blanco") | (DF1$color == "vlancoo")] <- "blanco"
+DF1$color[DF1$color == "Azulito"] <- "azul"
+DF1
+```
+
+# Ejercicio 2:
+
+## Se tienen los siguientes vectores:
+
+```{r}
+edad <- c(28,NA,26,26,26,25,21,32)
+peso <- c(NA ,69.3,70,72.6,70,68.9,NA,76.4)
+trabaja <- c("SI","NO","NO","SI","SI","SI","SI",NA)
+```
+
+```{r}
+DF2 <- data.frame(edad,peso,trabaja)
+DF2
+
+```
+
+```         
+```
+
+## 1) Realizar una imputación por la media en la variable "edad" (Use una aproximación de 1 decimal en caso sea necesario)
+
+```{r}
+summary(DF2$edad)
+```
+
+```{r}
+round(mean(DF2$edad,na.rm=TRUE),0)
+```
+
+**Limpieza:**
+
+```{r}
+DF2$edad[is.na(DF2$edad)] <- 26
+DF2
+```
+
+## 2) Realizar una imputación por la mediana en la variable "peso". (Use una aproximación de 1 decimal en caso sea necesario)
+
+```{r}
+summary(DF2$peso)
+```
+
+```{r}
+median(DF2$peso,na.rm=TRUE)
+```
+
+**Limpieza:**
+
+```{r}
+DF2$peso[is.na(DF2$peso)] <- 70
+DF2
+```
+
+## 3) Realizar una imputación por la moda en la variable "trabaja"
+
+```{r}
+library(modeest)
+```
+
+```{r}
+mlv(DF2$trabaja, method = "mfv")
+```
+
+**Limpieza:**
+
+```{r}
+DF2$trabaja[is.na(DF2$trabaja)] <- "SI"
+DF2
+```
+
+## 
