@@ -13,6 +13,9 @@ library("dplyr")
 #5.	¿Qué país de África tenía la menor esperanza de vida en 1952?
 #6.	Genera una tabla con el máximo y mínimo de lifeExp por continente en el año 2007.
 
+#Nivel avanzado
+#7 Crea una nueva columna que calcule el PIB total (gdpPercap * pop) y muestra el top 5 de países con mayor PIB total en 2007.
+
 data("gapminder")
 gapminder
 
@@ -57,6 +60,9 @@ consulta5
 consulta6 <- gapminder %>% filter(year==2007) %>% group_by(continent) %>% summarise(vida_min= min(lifeExp), vida_max = max(lifeExp))
 consulta6
 
+#consulta 7
+consulta8 <- gapminder %>% filter(year==2007) %>% mutate(pbi_total = gdpPercap * pop)%>% select(country, pbi_total) %>% arrange(desc(pbi_total)) %>% head(5)
+consulta8
 
 
 
