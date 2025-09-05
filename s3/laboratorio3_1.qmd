@@ -1,0 +1,92 @@
+---
+title: "Gráficos"
+format: html
+editor: visual
+---
+
+## 1) Gráfica de barras
+
+```{r}
+# Datos
+cursos <- c("Matemáticas", "Historia", "Biología", "Arte", "Computación")
+estudiantes <- c(25, 18, 30, 12, 20)
+
+# Diagrama de barras
+barplot(estudiantes,
+        names.arg = cursos,
+        col = "skyblue",
+        main = "Número de estudiantes por curso",
+        xlab = "Cursos", ylab = "Cantidad de estudiantes")
+```
+
+## 2) Diagrama de sector circular
+
+```{r}
+# Diagrama de sectores
+pie(estudiantes,
+    labels = cursos,
+    col = rainbow(length(cursos)),
+    main = "Distribución de estudiantes por curso")
+```
+
+## 3) Histograma
+
+```{r}
+# Notas de los estudiantes en un curso
+set.seed(123)
+notas <- round(rnorm(100, mean = 14, sd = 2), 1) # notas entre 0 y 20
+
+# Histograma
+hist(notas,
+     col = "lightgreen",
+     main = "Distribución de notas",
+     xlab = "Nota",
+     ylab = "Frecuencia",
+     breaks = 10)
+```
+
+## 4) Diagrama de cajas
+
+```{r}
+# Boxplot
+boxplot(notas,
+        col = "orange",
+        main = "Diagrama de caja de las notas",
+        ylab = "Notas")
+```
+
+## 5) Mosaico
+
+```{r}
+# Datos categóricos: Género y preferencia de curso
+genero <- c(rep("Hombre", 50), rep("Mujer", 50))
+curso_preferido <- c(sample(c("Matemáticas", "Arte"), 50, replace=TRUE),
+                     sample(c("Historia", "Biología"), 50, replace=TRUE))
+
+# Tabla de contingencia
+tabla <- table(genero, curso_preferido)
+
+# Diagrama de mosaico
+mosaicplot(tabla,
+           color = TRUE,
+           main = "Relación entre género y curso preferido",
+           xlab = "Género",
+           ylab = "Curso")
+```
+
+## 6) Gráfica de líneas
+
+```{r}
+# Datos de promedio mensual
+meses <- c("Ene", "Feb", "Mar", "Abr", "May", "Jun")
+promedios <- c(13.5, 14.2, 15.0, 14.8, 15.5, 16.0)
+
+# Gráfico de líneas
+plot(promedios, type = "o", col = "blue", lwd = 2,
+     xaxt = "n",  # Ocultar eje X para personalizar
+     main = "Evolución del promedio de notas",
+     xlab = "Meses", ylab = "Promedio")
+
+axis(1, at = 1:length(meses), labels = meses)  # Etiquetas en el eje X
+
+```
