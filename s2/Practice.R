@@ -64,6 +64,3 @@ consulta6
 consulta8 <- gapminder %>% filter(year==2007) %>% mutate(pbi_total = gdpPercap * pop)%>% select(country, pbi_total) %>% arrange(desc(pbi_total)) %>% head(5)
 consulta8
 
-
-
-

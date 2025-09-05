@@ -1,0 +1,67 @@
+---
+title: "teo"
+format: html
+editor: visual
+---
+
+### Coeficiente de variacion
+
+```{r}
+#formula de coeficiente de variacion (identificacion de datos homogeneos o heterogeneos)
+coef_var <- function(x){
+  sd(x)/mean(x)
+}
+
+```
+
+### Varianza
+
+```{r}
+#Varianza (“promedio” de las diferencias al cuadrado entre cada valor y la media.)
+varianza <- function(x){
+  var(x)
+}
+```
+
+### Desviacion estandar
+
+```{r}
+#La desviación estándar es una medida que indica qué tanto se alejan, en promedio, los datos de la media.
+desviacion_estandar <- function(x){
+  sd(x)
+}
+```
+
+### Rango intercuartilico:
+
+```{r}
+#El rango intercuartílico (IQR, por sus siglas en inglés) es una medida de dispersión estadística que indica la diferencia entre el tercer cuartil (Q3) y el primer cuartil (Q1) de un conjunto de datos. Se usa el type 3.
+rango_intercuartilico <- function(x){
+  IQR(x, type=3)
+}
+```
+
+### Cuantil
+
+```{r}
+#Un cuantil es un valor que divide un conjunto de datos ordenados en partes iguales. Por ejemplo, el cuantil 0.25 (Q1) es el valor que separa el 25% inferior de los datos del 75% superior.
+cuantil <- function(x, q){
+  quantile(x, probs = q, type=3)
+}
+```
+
+### Diagrama de caja
+
+```{r}
+edad <- c(12,20,25,26,63,200)
+caja <- boxplot(edad)
+caja
+caja$out #valores atipicos
+```
+
+### Valores ordenados
+
+```{r}
+#Los valores ordenados son los datos organizados en orden ascendente o descendente.
+edad[order(edad)]
+```
