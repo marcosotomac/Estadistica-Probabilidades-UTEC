@@ -1,0 +1,121 @@
+---
+title: "Análisis de las condiciones climáticas, físicas y acústicas de los ambientes de UTEC"
+subtitle: "Proyecto de investigación – Periodo académico 2025-II"
+author: "Equipo de investigación"
+format: revealjs
+theme: serif
+---
+
+## Grupo de investigación
+
+**Número de grupo:** 09
+
+**Integrantes:**
+
+-   Marco Soto Maceda
+
+-   Gerardo Landa
+
+-   Jose Rojas
+
+-   Jesus Chirinos
+
+-   Daniel Dongo
+
+------------------------------------------------------------------------
+
+## Introducción
+
+-   El confort ambiental en los espacios universitarios constituye un factor determinante para el aprendizaje efectivo.\
+-   Este proyecto busca analizar las condiciones climáticas, físicas y acústicas de los ambientes de UTEC, con el fin de garantizar un entorno académico adecuado.\
+-   Se utilizarán instrumentos de medición validados y se aplicará una metodología sistemática de recolección de datos.
+
+------------------------------------------------------------------------
+
+## Tema y objetivos
+
+### Tema
+
+**Análisis de las condiciones climáticas, físicas y acústicas de los ambientes de UTEC en el periodo académico 2025-II.**
+
+### Objetivo general
+
+**Identificar los factores que garantizan las condiciones climáticas, físicas y acústicas adecuadas para los ambientes de UTEC en el periodo académico 2025-II.**
+
+### Objetivos específicos
+
+1.  **Medir** las variables ambientales (temperatura, humedad relativa, intensidad de sonido, iluminancia e intensidad del campo magnético) en distintos ambientes, pisos y turnos de la universidad.\
+2.  **Analizar** la relación entre las condiciones físicas (número de personas, fuentes de luz, ventanas, límites) y la variación de los parámetros ambientales registrados.\
+3.  **Evaluar** el impacto de los factores ambientales sobre la percepción de comodidad y adecuación de los espacios académicos, con base en criterios de ergonomía y rendimiento estudiantil.
+
+------------------------------------------------------------------------
+
+## Fundamentación académica
+
+-   La literatura científica ha demostrado que variables como la **temperatura** y la **iluminación** influyen en el rendimiento cognitivo y en la concentración de los estudiantes.\
+-   La **acústica** y los niveles de ruido son determinantes en la calidad de la comunicación docente-estudiante.\
+-   UTEC, por su diseño arquitectónico innovador y uso intensivo de aulas, requiere una evaluación empírica que aporte evidencia objetiva para mejorar sus condiciones de habitabilidad académica.
+
+------------------------------------------------------------------------
+
+## Instrumento de recolección
+
+### Justificación
+
+El instrumento de recolección está diseñado para obtener **mediciones objetivas** y **observaciones sistemáticas**, garantizando datos fiables para análisis estadístico.
+
+### Variables principales
+
+| Nº  | Variable                           | Tipo de variable      |
+|-----|------------------------------------|-----------------------|
+| 1   | Temperatura (°C)                   | Cuantitativa continua |
+| 2   | Humedad relativa (%)               | Cuantitativa continua |
+| 3   | Intensidad de sonido (dB)          | Cuantitativa continua |
+| 4   | Iluminancia (lux)                  | Cuantitativa continua |
+| 5   | Intensidad de campo magnético (µT) | Cuantitativa continua |
+| 6   | Número de personas                 | Cuantitativa discreta |
+| 7   | Fuentes artificiales de luz        | Cuantitativa discreta |
+| 8   | Número de ventanas                 | Cuantitativa discreta |
+| 9   | Límite (abierto/cerrado)           | Cualitativa nominal   |
+| 10  | Fecha de medición                  | Cualitativa ordinal   |
+| 11  | Día (Lunes-Sábado)                 | Cualitativa nominal   |
+| 12  | Turno (mañana, tarde, noche)       | Cualitativa ordinal   |
+| 13  | Piso                               | Cualitativa ordinal   |
+| 14  | Exposición lumínica                | Cualitativa nominal   |
+
+------------------------------------------------------------------------
+
+## Metodología de recolección
+
+-   **Instrumentos:**
+    -   Termómetros digitales, higrómetros, sonómetros, luxómetros y magnetómetros.\
+    -   Fichas de observación para variables discretas y cualitativas.
+-   **Diseño de recolección:**
+    -   Muestreo en diferentes aulas, pisos y turnos.\
+    -   Registro estandarizado con fechas, días y horarios específicos.\
+    -   Procesamiento mediante software estadístico (SPSS, R o Python).
+
+------------------------------------------------------------------------
+
+## Importancia del estudio
+
+-   Contribuye a la mejora de la **infraestructura universitaria** mediante evidencia empírica.\
+-   Asegura que los estudiantes cuenten con **ambientes óptimos** para el aprendizaje.\
+-   Aporta datos objetivos para la **gestión institucional** en ergonomía, acústica y ventilación.
+
+------------------------------------------------------------------------
+
+## Conclusiones esperadas
+
+-   Identificación de factores críticos que inciden en el confort académico.\
+-   Evidencia cuantitativa para proponer mejoras en iluminación, ventilación y control acústico.\
+-   Recomendaciones prácticas que beneficien tanto a estudiantes como a docentes.
+
+------------------------------------------------------------------------
+
+## Próximos pasos
+
+1.  Validación del instrumento de recolección.\
+2.  Implementación del trabajo de campo durante el periodo 2025-II.\
+3.  Procesamiento estadístico de los datos.\
+4.  Redacción del informe final con recomendaciones académicas.
