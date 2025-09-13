@@ -1,0 +1,68 @@
+---
+title: "ggplot-obesidad"
+format: html
+editor: visual
+---
+
+## Insltalación y carga de librería
+
+```{r}
+# Instalar si aún no lo tienes
+# install.packages("ggplot2")
+
+# Cargar las librerías
+library(readr)
+library(ggplot2)
+```
+
+## Carga de datos
+
+```{r}
+DF <- read_csv("obesidad.csv")
+```
+
+## Gráfico de dispersión
+
+```{r}
+# Gráfico de dispersión: relación entre peso (wt) y rendimiento (mpg)
+ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = "blue", size = 3) +        # puntos
+  geom_smooth(method = "lm", col = "red") +     # línea de regresión
+  labs(
+    title = "Relación entre peso y consumo de combustible",
+    x = "Peso del vehículo (1000 lbs)",
+    y = "Millas por galón (mpg)"
+  ) +
+  theme_minimal()
+```
+
+Este gráfico muestra cómo a mayor **peso del vehículo (`wt`)**, menor suele ser el **rendimiento en millas por galón (`mpg`)**.\
+
+🔹 `geom_point()` agrega los puntos.\
+
+🔹 `geom_smooth(method = "lm")` ajusta una recta de regresión.\
+
+🔹 `theme_minimal()` da un estilo más limpio.
+
+```{r}
+data = mtcars
+data
+```
+
+```{r}
+str(data)
+```
+
+**Ejemplo con colores por categoría (`cyl`)**
+
+```{r}
+ggplot(data = mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3) +
+  labs(
+    title = "Consumo según número de cilindros",
+    x = "Peso del vehículo",
+    y = "Millas por galón",
+    color = "Cilindros"
+  ) +
+  theme_classic()
+```
