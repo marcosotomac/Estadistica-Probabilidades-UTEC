@@ -1,0 +1,488 @@
+---
+title: "T1 - Cuytopia"
+format: html
+editor: visual
+---
+
+```{r}
+library(readr)
+```
+
+```{r}
+DF <- read_csv("data.csv")
+```
+
+### Pregunta 1:
+
+```{r}
+#Cantidad de unidades muestrales:
+nrow(DF)
+#Cantidad de variables:
+ncol(DF)
+```
+
+### Pregunta 2:
+
+```{r}
+#Cantidad de datos faltantes de la tabla
+sum(is.na(DF))
+#Cantidad de filas incompletas
+sum(!complete.cases(DF))
+#Porcentaje de datos faltantes
+round(sum(is.na(DF))*100/(ncol(DF)*nrow(DF)),2)
+#Porcentaje de filas incompletas
+round(sum(!complete.cases(DF))*100/nrow(DF), 2)
+```
+
+### Pregunta 3:
+
+```{r}
+#El tamaño de la muestra es
+nrow(DF)
+#Tamaño efectivo si se descartan los datos faltantes
+sum(complete.cases(DF))
+#Variable con el menor tamaño efectivo
+n_por_variable <- colSums(!is.na(DF))   
+var_min <- names(which.min(n_por_variable))
+n_min   <- min(n_por_variable)
+var_min; n_min
+```
+
+### Pregunta 4:
+
+```{r}
+#maximo de datos faltantes en una unidad muestral es
+na_por_fila <- rowSums(is.na(DF))
+max_faltantes <- max(na_por_fila)
+max_faltantes
+#Numero de unidades muest
+n_con_max <- sum(na_por_fila == max_faltantes)
+n_con_max
+#promedio de datos faltantes por unidad muestral
+round(mean(na_por_fila), 2)
+#mediana de datos faltantes por unidad muestral
+round(median(na_por_fila), 2)
+```
+
+### Pregunta 5:
+
+```{r}
+#Cantidad de variables categoricas en la tabla
+sum(sapply(DF, is.character))
+#Cantidad de variables numericas en la tabla
+sum(sapply(DF, is.numeric))
+```
+
+### Pregunta 7:
+
+```{r}
+#moda de edad
+names(sort(table(DF$Edad), decreasing=TRUE))[1]
+#cantidad de valores diferentes de DF$Edad
+length(unique(DF$Edad))
+#mediana de DF$Edad
+round(median(DF$Edad, na.rm=TRUE), 2)
+#promedio de DF$Edad
+round(mean(DF$Edad, na.rm=TRUE),2)
+#Desviacion estandar de DF$Edad
+round(sd(DF$Edad, na.rm=TRUE),2)
+```
+
+### Pregunta 8
+
+```{r}
+DFLIMP <- DF
+DFLIMP$Sexo[DF$Sexo=="m"]<-"macho"
+DFLIMP$Sexo[DF$Sexo=="Macho"]<-"macho"
+DFLIMP$Sexo[DF$Sexo=="M"]<-"macho"
+DFLIMP$Sexo[DF$Sexo=="machoo"]<-"macho"
+DFLIMP$Sexo[DF$Sexo=="MMacho"]<-"macho"
+DFLIMP$Sexo[DF$Sexo=="Machoo"]<-"macho"
+DFLIMP$Sexo[DF$Sexo=="mmachoo"]<-"macho"
+DFLIMP$Sexo[DF$Sexo=="Mmachoo"]<-"macho"
+DFLIMP$Sexo[DF$Sexo=="H"]<-"hembra"
+DFLIMP$Sexo[DF$Sexo=="h"]<-"hembra"
+DFLIMP$Sexo[DF$Sexo=="Hembra"]<-"hembra"
+table(DFLIMP$Sexo)
+#tamaño efectivo de la variable DFLIMP$Sexo
+table(DFLIMP$Sexo)
+sum(complete.cases(DFLIMP$Sexo))
+
+```
+
+### Pregunta 9:
+
+```{r}
+DFLIMP$Raza[DF$Raza=="Cuy"]<-"híbrido"
+DFLIMP$Raza[DF$Raza=="cuy"]<-"híbrido"
+DFLIMP$Raza[DF$Raza=="Abisinio"]<-"abisinio"
+DFLIMP$Raza[DF$Raza=="Andino"]<-"andino"
+DFLIMP$Raza[DF$Raza=="adinon"]<-"andino"
+DFLIMP$Raza[DF$Raza=="Cuy andino"]<-"andino"
+DFLIMP$Raza[DF$Raza=="Cuy Andino"]<-"andino"
+DFLIMP$Raza[DF$Raza=="hibrido"]<-"híbrido"
+DFLIMP$Raza[DF$Raza=="Cuy peruano"]<-"peruano"
+DFLIMP$Raza[DF$Raza=="Híbrido"]<-"híbrido"
+DFLIMP$Raza[DF$Raza=="ibrido"]<-"híbrido"
+DFLIMP$Raza[DF$Raza=="Peruanoo"]<-"peruano"
+DFLIMP$Raza[DF$Raza=="Cuy Peruano"]<-"peruano"
+DFLIMP$Raza[DF$Raza=="Peruano"]<-"peruano"
+DFLIMP$Raza[DF$Raza=="peruanoo"]<-"peruano"
+DFLIMP$Raza[DF$Raza=="Hibrido"]<-"híbrido"
+DFLIMP$Raza[DF$Raza=="hibrido"]<-"híbrido"
+DFLIMP$Raza[DF$Raza=="Americano"]<-"americano"
+DFLIMP$Raza[DF$Raza=="Americanoo"]<-"americano"
+DFLIMP$Raza[DF$Raza=="anDino"]<-"andino"
+DFLIMP$Raza[DF$Raza=="Cuy abisinio"]<-"abisinio"
+DFLIMP$Raza[DF$Raza=="Cuy Abisinio"]<-"abisinio"
+DFLIMP$Raza[DF$Raza=="Cuy Abismo"]<-"abisinio"
+DFLIMP$Raza[DF$Raza=="Cuy americano"]<-"americano"
+DFLIMP$Raza[DF$Raza=="Cuy Americano"]<-"americano"
+DFLIMP$Raza[DF$Raza=="aNDino"]<-"andino"
+DFLIMP$Raza[DF$Raza=="Cuy híbrido"]<-"híbrido"
+DFLIMP$Raza[DF$Raza=="Cuy rex"]<-"rex"
+DFLIMP$Raza[DF$Raza=="Cuy skinny"]<-"skinny"
+DFLIMP$Raza[DF$Raza=="Cuy Híbrido"]<-"híbrido"
+table(DFLIMP$Raza)
+```
+
+### Pregunta 10:
+
+```{r}
+DFLIMP$Color[DFLIMP$Color=="Blanco"]<-"blanco"
+DFLIMP$Color[DFLIMP$Color=="blancoo"]<-"blanco"
+DFLIMP$Color[DFLIMP$Color=="Blancoo"]<-"blanco"
+DFLIMP$Color[DFLIMP$Color=="Gris"]<-"gris"
+DFLIMP$Color[DFLIMP$Color=="Marrón"]<-"marrón"
+DFLIMP$Color[DFLIMP$Color=="mMarrón"]<-"marrón"
+DFLIMP$Color[DFLIMP$Color=="MMarrón"]<-"marrón"
+DFLIMP$Color[DFLIMP$Color=="MMarrón"]<-"marrón"
+DFLIMP$Color[DFLIMP$Color=="Mmarrón"]<-"marrón"
+DFLIMP$Color[DFLIMP$Color=="Marrón Oscuro"]<-"marrón oscuro"
+DFLIMP$Color[DFLIMP$Color=="Negro"]<-"negro"
+DFLIMP$Color[DFLIMP$Color=="negroo"]<-"negro"
+DFLIMP$Color[DFLIMP$Color=="Negroo"]<-"negro"
+DFLIMP$Color[DFLIMP$Color=="Rojizo"]<-"rojizo"
+DFLIMP$Color[DFLIMP$Color=="Roojizoo"]<-"rojizo"
+DFLIMP$Color[DFLIMP$Color=="Pintado"]<-"pintado"
+DFLIMP$Color[DFLIMP$Color=="Pintadoo"]<-"pintado"
+DFLIMP$Color[DFLIMP$Color=="pintadoo"]<-"pintado"
+DFLIMP$Color[DFLIMP$Color=="Tricolor"]<-"tricolor"
+DFLIMP$Color[DFLIMP$Color=="Tricooloor"]<-"tricolor"
+DFLIMP$Color[DFLIMP$Color=="Rosa"]<-"rosa"
+table(DFLIMP$Color)
+#moda de DFLIMP$Color
+names(sort(table(DFLIMP$Color), decreasing=TRUE))[1]
+sum(complete.cases(DF$Color))
+```
+
+### Pregunta 11:
+
+```{r}
+DFLIMP$Peso[DFLIMP$Peso==72834.00]<-NA
+DFLIMP$Peso[DFLIMP$Peso==93302.00]<-NA
+DFLIMP$Peso[DFLIMP$Peso==90098.00]<-NA
+round(summary(DFLIMP$Peso),2)
+#desviacion estandar de DFLIMP$Peso
+round(sd(DFLIMP$Peso, na.rm = TRUE), 2)
+#Tamaño efectivo de la muestra para la variable Peso 
+sum(complete.cases(DFLIMP$Peso))
+#los valores tienen un sesgo a la derecha, izquierda o aproximadamente simetrica
+library(ggplot2)
+ggplot(DFLIMP, aes(x=Peso)) + geom_histogram(binwidth=100, fill="blue", color="black", alpha=0.7) + labs(title="Histograma de Peso", x="Peso", y="Frecuencia")
+
+```
+
+### Pregunta 12
+
+```{r}
+## --- Pregunta 12: Edad ---
+
+# 1) Verificar atípicos y errores (ya lo hiciste)
+boxplot(DFLIMP$Edad, main="Diagrama de caja de Edad", ylab="Edad")
+boxplot.stats(DFLIMP$Edad)$out            # <- 0 atípicos
+sum(DFLIMP$Edad %% 1 != 0, na.rm = TRUE)  # <- 0 no enteros
+
+# 2) (Por si acaso) reemplazar valores no enteros por NA
+DFLIMP$Edad[DFLIMP$Edad %% 1 != 0] <- NA
+
+# 3) Descriptores (redondeados a 2 decimales)
+min_edad  <- min(DFLIMP$Edad, na.rm = TRUE)
+med_edad  <- median(DFLIMP$Edad, na.rm = TRUE)
+max_edad  <- max(DFLIMP$Edad, na.rm = TRUE)
+mean_edad <- mean(DFLIMP$Edad, na.rm = TRUE)
+sd_edad   <- sd(DFLIMP$Edad, na.rm = TRUE)
+n_efec    <- sum(!is.na(DFLIMP$Edad))
+
+round(c(minimo = min_edad,
+        mediana = med_edad,
+        maximo = max_edad,
+        promedio = mean_edad,
+        sd = sd_edad), 2)
+n_efec
+```
+
+### Pregunta 13:
+
+```{r}
+boxplot(DFLIMP$Cintura, main="Diagrama de caja de Cintura", ylab="Cintura")
+boxplot.stats(DFLIMP$Cintura)$out
+sum(DFLIMP$Cintura %% 1 != 0, na.rm = TRUE)
+DFLIMP$Cintura[DFLIMP$Cintura %% 1 != 0] <- NA
+boxplot(DFLIMP$Cintura, main="Diagrama de caja de Cintura (limpia)", ylab="Cintura")
+
+min_cint  <- min(DFLIMP$Cintura, na.rm = TRUE)
+med_cint  <- median(DFLIMP$Cintura, na.rm = TRUE)
+max_cint  <- max(DFLIMP$Cintura, na.rm = TRUE)
+mean_cint <- mean(DFLIMP$Cintura, na.rm = TRUE)
+sd_cint   <- sd(DFLIMP$Cintura, na.rm = TRUE)
+n_cint    <- sum(!is.na(DFLIMP$Cintura))
+
+round(c(minimo = min_cint,
+        mediana = med_cint,
+        maximo = max_cint,
+        promedio = mean_cint,
+        sd = sd_cint), 2)
+n_cint
+
+
+```
+
+### Pregunta 14
+
+```{r}
+### Pregunta 14: Largo
+
+# 1) Boxplot para ver valores claramente erróneos
+boxplot(DFLIMP$Largo, main="Diagrama de caja de Largo", ylab="Largo")
+boxplot.stats(DFLIMP$Largo)$out   # muestra los atípicos
+
+# 2) Contar valores no enteros
+sum(DFLIMP$Largo %% 1 != 0, na.rm = TRUE)
+
+# 3) Sustituir valores no enteros por NA
+DFLIMP$Largo[DFLIMP$Largo %% 1 != 0] <- NA
+
+library(e1071)
+skewness(DFLIMP$Largo, na.rm = TRUE)
+```
+
+### Pregunta 15:
+
+```{r}
+DFLIMP$Talla<-tolower(DFLIMP$Talla)
+DFLIMP$Talla[DFLIMP$Talla=="goordo"]<-"gordo"
+DFLIMP$Talla[DFLIMP$Talla=="goordoo"]<-"gordo"
+DFLIMP$Talla[DFLIMP$Talla=="gordoo"]<-"gordo"
+DFLIMP$Talla[DFLIMP$Talla=="obesoo"]<-"obeso"
+DFLIMP$Talla[DFLIMP$Talla=="sanoo"]<-"sano"
+DFLIMP$Talla <- factor(DFLIMP$Talla, levels = c("flaco", "sano", "gordo", "obeso"), ordered = TRUE)
+unique(DFLIMP$Talla)
+
+# Moda: categoría más frecuente
+names(which.max(table(DFLIMP$Talla)))
+sum(!is.na(DFLIMP$Talla))
+
+#primer cuartil
+quantile(as.numeric(DFLIMP$Talla), probs = 0.25, na.rm = TRUE, type=3)
+#segundo cuartil
+quantile(as.numeric(DFLIMP$Talla), probs = 0.50, na.rm = TRUE, type=3)
+#tercer cuartil
+quantile(as.numeric(DFLIMP$Talla), probs = 0.75, na.rm = TRUE, type = 3)
+```
+### Pregunta 16:
+```{r}
+
+#--------
+# Media, mediana y desviación estándar
+media   <- round(mean(DFLIMP$Edad, na.rm = TRUE),2)
+mediana <- round(median(DFLIMP$Edad, na.rm = TRUE),2)
+sd_edad <- round(sd(DFLIMP$Edad, na.rm = TRUE),2)
+
+# Coeficiente de variación (CV)
+cv <- round(sd_edad / media, 2)
+cv
+
+# Clasificación del sesgo
+if (media > mediana) {
+  sesgo <- "a la derecha de la mediana"
+} else if (media < mediana) {
+  sesgo <- "a la izquierda de la mediana"
+} else {
+  sesgo <- "simétrica respecto a la mediana"
+}
+
+# Clasificación del CV según tu rúbrica
+if (cv <= 0.30) {
+  disp <- "relativamente concentrada alrededor de la mediana"
+} else {
+  disp <- "relativamente dispersa alrededor de la mediana"
+}
+
+list(
+  media = media,
+  mediana = mediana,
+  cv = cv,
+  clasificacion_sesgo = sesgo,
+  clasificacion_cv = disp
+)
+```
+### Pregunta 17:
+```{r}
+#rango de la variable cintura
+rango_cintura <- range(DFLIMP$Cintura, na.rm = TRUE)
+rango_cintura
+#rango intercuartil tipo 3
+IQR_cintura <- IQR(DFLIMP$Cintura, na.rm = TRUE, type = 3)
+IQR_cintura
+#coeficiente de variacion de cintura
+media   <- round(mean(DFLIMP$Cintura, na.rm = TRUE),2)
+mediana <- round(median(DFLIMP$Cintura, na.rm = TRUE),2)
+sd_edad <- round(sd(DFLIMP$Cintura, na.rm = TRUE),2)
+
+# Coeficiente de variación (CV)
+cv <- round(sd_edad / media, 2)
+cv
+
+# ==== PREGUNTA 17: CINTURA ====
+
+# Q1, Q2, Q3 con método tipo 3
+q1_cint <- quantile(DFLIMP$Cintura, probs = 0.25, type = 3, na.rm = TRUE)
+q2_cint <- quantile(DFLIMP$Cintura, probs = 0.50, type = 3, na.rm = TRUE)
+q3_cint <- quantile(DFLIMP$Cintura, probs = 0.75, type = 3, na.rm = TRUE)
+
+# Rango e IQR
+rango_cint <- max(DFLIMP$Cintura, na.rm = TRUE) - min(DFLIMP$Cintura, na.rm = TRUE)
+iqr_cint   <- q3_cint - q1_cint
+
+# Media, desviación estándar y coeficiente de variación
+media_cint <- mean(DFLIMP$Cintura, na.rm = TRUE)
+sd_cint    <- sd(DFLIMP$Cintura, na.rm = TRUE)
+cv_cint    <- sd_cint / media_cint
+
+# Clasificación del CV según tu rúbrica
+if (cv_cint <= 0.30) {
+  clasif_cv <- "bajo → relativamente concentrada alrededor de la mediana"
+} else {
+  clasif_cv <- "moderado → relativamente dispersa alrededor de la mediana"
+}
+
+# Mostrar resultados
+list(
+  Q1 = q1_cint,
+  Q2 = q2_cint,
+  Q3 = q3_cint,
+  Rango = rango_cint,
+  IQR = iqr_cint,
+  Media = media_cint,
+  DesvEst = sd_cint,
+  CV = cv_cint,
+  Clasificacion = clasif_cv
+)
+```
+### Pregunta 18:
+```{r}
+# ==== Evaluación de variable Largo ====
+
+# Calcular medidas
+media   <- mean(DFLIMP$Largo, na.rm = TRUE)
+mediana <- median(DFLIMP$Largo, na.rm = TRUE)
+sd_l    <- sd(DFLIMP$Largo, na.rm = TRUE)
+cv      <- sd_l / media
+
+# Clasificación del sesgo
+if (media > mediana) {
+  sesgo <- "a la derecha de la mediana"
+} else if (media < mediana) {
+  sesgo <- "a la izquierda de la mediana"
+} else {
+  sesgo <- "simétrica (aprox.)"
+}
+
+# Clasificación de dispersión según rúbrica
+if (cv <= 0.30) {
+  disp <- "relativamente concentrada alrededor de la mediana"
+} else {
+  disp <- "relativamente dispersa alrededor de la mediana"
+}
+
+list(
+  media = media,
+  mediana = mediana,
+  cv = cv,
+  clasificacion_sesgo = sesgo,
+  clasificacion_cv = disp
+)
+```
+### Pregunta 19:
+```{r}
+#rango de la variable Peso 
+rango_peso <- range(DFLIMP$Peso, na.rm = TRUE)
+rango_peso 
+# Cuartiles con método tipo 3
+q1_peso <- quantile(DFLIMP$Peso, probs = 0.25, type = 3, na.rm = TRUE)
+q3_peso <- quantile(DFLIMP$Peso, probs = 0.75, type = 3, na.rm = TRUE)
+
+# Rango intercuartílico
+iqr_peso <- q3_peso - q1_peso
+
+# Media, desviación estándar y coeficiente de variación
+media_peso <- round(mean(DFLIMP$Peso, na.rm = TRUE),2 )
+sd_peso    <- round(sd(DFLIMP$Peso, na.rm = TRUE),2 )
+cv_peso    <- round(sd_peso / media_peso, 2)
+
+list(
+  Q1 = q1_peso,
+  Q3 = q3_peso,
+  IQR_tipo3 = iqr_peso,
+  Media = media_peso,
+  DesvEst = sd_peso,
+  CV = cv_peso
+)
+# ==== Clasificación de variable (ejemplo con Peso) ====
+
+# Calcular medidas básicas
+media   <- mean(DFLIMP$Peso, na.rm = TRUE)
+mediana <- median(DFLIMP$Peso, na.rm = TRUE)
+sd_p    <- sd(DFLIMP$Peso, na.rm = TRUE)
+cv      <- sd_p / media
+
+# Clasificación del sesgo (comparar media vs mediana)
+if (media > mediana) {
+  sesgo <- "a la derecha de la mediana"
+} else if (media < mediana) {
+  sesgo <- "a la izquierda de la mediana"
+} else {
+  sesgo <- "aproximadamente simétrica"
+}
+
+# Clasificación de la dispersión según tu rúbrica
+if (cv <= 0.30) {
+  disp <- "relativamente concentrada alrededor de la mediana"
+} else {
+  disp <- "relativamente dispersa alrededor de la mediana"
+}
+
+list(
+  media = media,
+  mediana = mediana,
+  cv = round(cv, 3),
+  clasificacion_sesgo = sesgo,
+  clasificacion_disp = disp
+)
+```
+### Pregunta 20:
+```{r}
+#Variabilidad de las variables
+var_cintura <- var(DFLIMP$Cintura, na.rm = TRUE)
+var_largo   <- var(DFLIMP$Largo, na.rm = TRUE)
+var_peso    <- var(DFLIMP$Peso, na.rm = TRUE)
+var_edad  <- var(DFLIMP$Edad, na.rm = TRUE)
+list(
+  Var_Cintura = var_cintura,
+  Var_Largo = var_largo,
+  Var_Peso = var_peso,
+  Var_edad = var_edad
+)
+```
+

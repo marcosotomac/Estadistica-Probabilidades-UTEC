@@ -1,0 +1,9 @@
+---
+title: "T1 - Cuytopia"
+format: html
+editor: visual
+---
+
+```{r}
+library(readr)
+```
